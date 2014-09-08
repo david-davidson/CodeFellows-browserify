@@ -1,0 +1,30 @@
+<h1>Enter some numbers, click Enter, and check the console for mean, median, and mode:</h1>
+<textarea id="numbers">
+</textarea>
+<button id="init">
+	Enter
+</button>
+
+<script src="output.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+	/**
+	 * How to build this:
+	 * browserify -r ./lib/meanMedianMode:meanMedianMode > output.js
+	 * Note 1.) the './' before 'lib' and 2.) the name after the colon, which governs the name of the output module (that the browser can see)
+	 */
+	var meanMedianMode = require('meanMedianMode');
+	var mean = meanMedianMode.mean;
+	var median = meanMedianMode.median;
+	var mode = meanMedianMode.mode;
+	$(document).ready(function() {
+		$('#init').on('click', function() {
+			var numbers = $('#numbers').val().split(' ').map(Number);
+			alert(
+					'mean: ' + mean(numbers) + '\n' +
+					'median: ' + median(numbers) + '\n' +
+					'mode: ' + mode(numbers)
+				);
+		});
+	});
+</script>
